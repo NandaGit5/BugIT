@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
             BugITAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Android",
+                        name = "Mobily Bug IT",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
