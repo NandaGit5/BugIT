@@ -1,8 +1,8 @@
 package com.mobily.bugitapp.models
 
 data class BugData(
-    val id: String,
-    val title: String,
-    val description: String,
+    val bugId: String,
+    val bugDescription: String,
+    val imageUris: List<String>,
     val status: String
 )
