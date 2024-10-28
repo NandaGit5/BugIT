@@ -1,5 +1,6 @@
 package com.mobily.bugitapp.viewmodels
 
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,13 +20,20 @@ class BugITViewModel @Inject constructor(private val bugTrackerRepository: BugIT
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
-    /**
+
+/**
      * Submits a bug report to the bug tracking system.
      * @param bugId The ID of the user submitting the bug report.
      * @param description The name of the user submitting the bug report.
      * @param userImage The image associated with the bug report, encoded as a string.
      */
-    fun submitBugReport(bugId: String, description: String, userImage: String) {
+
+    fun submitBugReport(
+        bugId: String,
+        description: String,
+        userImage: String,
+        selectedImageUris: SnapshotStateList<String>
+    ) {
         _isLoading.value = true
         val listener = Response.Listener<String> { response ->
             _response.value = response
@@ -38,6 +46,6 @@ class BugITViewModel @Inject constructor(private val bugTrackerRepository: BugIT
         }
 
         val action = "insert" // Set the action here as needed
-        bugTrackerRepository.submitBugReport(action, bugId, description, userImage, listener, errorListener)
+        bugTrackerRepository.submitBugReport(action, bugId, description, userImage, selectedImageUris,listener, errorListener)
     }
 }

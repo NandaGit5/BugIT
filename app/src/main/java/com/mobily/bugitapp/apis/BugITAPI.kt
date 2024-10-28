@@ -1,5 +1,6 @@
 package com.mobily.bugitapp.apis
 
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.mobily.bugitapp.utilities.AppConstants
@@ -14,7 +15,8 @@ interface BugITAPI {
         @Query("uBugId") userId: String,                 // Bug ID of the report
         @Query("uDescription") userName: String,        // Description of the bug
         @Query("uImage") userImage: String,            // Image of the bug (as string)
-        listener: Response.Listener<String>,          // Success listener for the response
-        errorListener: Response.ErrorListener        // Error listener for the response
+        selectedImageUris: SnapshotStateList<String>,          // Success listener for the response
+        listener: Response.Listener<String>,
+        errorListener: Response.ErrorListener        // Error listener for the response){}
     ): StringRequest
 }

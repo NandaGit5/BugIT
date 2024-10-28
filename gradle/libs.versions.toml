@@ -3,10 +3,12 @@ agp = "8.7.1"
 coilCompose = "2.6.0"
 converterGson = "2.9.0"
 googleApiClientAndroid = "1.33.0"
-googleApiServicesSheets = "v4-rev20210810-1.32.1"
+googleApiServicesSheets = "v4-rev20220820-1.32.1"
+googleApiServicesSheetsVersion = "v4-rev20220202-1.32.1"
 hiltAndroid = "2.45"
 hiltNavigationCompose = "1.2.0"
 hiltNavigationComposeVersion = "1.0.0"
+jacksonDatabind = "2.13.0"
 kotlin = "2.0.0"
 coreKtx = "1.10.1"
 junit = "4.13.2"
@@ -34,8 +36,11 @@ androidx-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedat
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 google-api-client-android = { module = "com.google.api-client:google-api-client-android", version.ref = "googleApiClientAndroid" }
-google-api-services-sheets = { module = "com.google.apis:google-api-services-sheets", version.ref = "googleApiServicesSheets" }
+google-api-services-sheets-vv4rev202208201321 = { module = "com.google.apis:google-api-services-sheets", version.ref = "googleApiServicesSheets" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
+jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "jacksonDatabind" }
+jackson-core = { module = "com.fasterxml.jackson.core:jackson-core", version.ref = "jacksonDatabind" }
+jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jacksonDatabind" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

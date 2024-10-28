@@ -29,7 +29,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Snackbar
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -46,10 +48,10 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.mobily.bugitapp.R
 import com.mobily.bugitapp.utilities.ImageUtilities.getResizedBitmap
 import com.mobily.bugitapp.utilities.ImageUtilities.getStringImage
 import com.mobily.bugitapp.utilities.MultipleImageContract
@@ -57,14 +59,17 @@ import com.mobily.bugitapp.viewmodels.BugITViewModel
 
 var selectedImages = mutableStateListOf<Uri>()
 var selectedImageUris = mutableStateListOf<String>()
-
 @SuppressLint("UnrememberedMutableState")
 @Composable
-fun AddBugScreen(navController: NavController) {
+fun AddBugScreen(navController: NavController, viewModel: BugITViewModel) {
     var bugId by remember { mutableStateOf("") }
     var bugDescription by remember { mutableStateOf("") }
     var bugStatus by remember { mutableStateOf("") }
-
+    val isLoading by viewModel.isLoading.observeAsState(initial = false)
+    val response by viewModel.response.observeAsState()
+    var showMessage by remember { mutableStateOf(false) }
+    var bugImage by remember  {(mutableStateOf<String?>(null))}
+    //val inputStream = context.resources.openRawResource(R.raw.service_account)
 
     Column(
         modifier = Modifier
@@ -104,10 +109,41 @@ fun AddBugScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
+
+        if (showMessage) {
+            Snackbar(
+                action = {
+                    TextButton(onClick = { showMessage = false }) {
+                        Text("Dismiss")
+                    }
+                }
+            ) {
+                Text(text = "Bug report submitted successfully: $response")
+            }
+        }
+
+        LaunchedEffect(response) {
+            if (!response.isNullOrBlank()) {
+                showMessage = true
+            }
+        }
+
+        if (isLoading) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .wrapContentSize(Alignment.Center)
+            ) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(90.dp),
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+        }
+
         Button(
             onClick = {
-               // submit bug
-              //  navController.navigate("tasksList")
+                viewModel.submitBugReport(bugId,bugDescription,bugStatus, selectedImageUris)
             },
             modifier = Modifier
                 .fillMaxWidth()
