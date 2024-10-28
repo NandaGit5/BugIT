@@ -49,7 +49,7 @@ fun DashboardUI(navController: NavController) {
         contentAlignment = Alignment.TopCenter
     ) {
     Text(
-        text = "Welcome to Bug Tracking",
+        text = "Welcome to Bug Tracking System",
         fontSize = 18.sp,
         fontWeight = FontWeight.Bold,
         color = Color.Black,
